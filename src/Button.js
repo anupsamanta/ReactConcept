@@ -6,6 +6,7 @@ import {
 function Button11(props) {
  console.log(`Button clicked ${props.children}` + '  A');
  console.log('test vakil');
+ console.log('test vakil 121');
     return (
     <View>
         <TouchableOpacity onPress = {props.handleClick}>
