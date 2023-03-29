@@ -8,6 +8,8 @@ function Button11(props) {
  console.log('test vakil');
  console.log('test vakil 121');
  console.log('test anup');
+ console.log("Add another log");
+
     return (
     <View>
         <TouchableOpacity onPress = {props.handleClick}>
