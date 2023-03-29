@@ -10,6 +10,7 @@ function Button11(props) {
  console.log('test anup');
  console.log('test3')
  console.log("Add another log");
+ console.log("Add another log 123333333");
 
     return (
     <View>
