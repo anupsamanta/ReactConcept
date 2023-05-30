@@ -1,5 +1,7 @@
 import React, {useEffect} from 'react';
 import {View, TouchableOpacity, Text, BackHandler, Alert} from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
+import styles from './style';
 function Login(props) {
   const gotoNextScreen = async () => {
     props.navigation.navigate('DrawerRouter');
@@ -39,70 +41,56 @@ function Login(props) {
 
     return () => backHandler.remove();
   }, []);
+  const signupClk = () =>{
+    alert('Signup clicked')
+  }
   return (
     // eslint-disable-next-line react-native/no-inline-styles
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <View style={styles.mainView}>
+      <View style = {styles.conceptView}>
       <TouchableOpacity onPress={gotoNextScreen}>
         <Text
           // eslint-disable-next-line react-native/no-inline-styles
-          style={{
-            marginBottom: 100,
-            fontSize: 24,
-            color: 'orange',
-            fontWeight: 'bold',
-          }}>
+          style={styles.cText}>
           Welcome to Login Screen
         </Text>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={goto}>
         <Text
-          // eslint-disable-next-line react-native/no-inline-styles
-          style={{
-            marginBottom: 100,
-            fontSize: 24,
-            color: 'orange',
-            fontWeight: 'bold',
-          }}>
+          style={styles.cText}>
           Concept of UseReducer
         </Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={gotoUseStateScreen}>
-        <Text
-          // eslint-disable-next-line react-native/no-inline-styles
-          style={{
-            marginBottom: 100,
-            fontSize: 24,
-            color: 'orange',
-            fontWeight: 'bold',
-          }}>
+        <Text style={styles.cText}>
           Concept of UseState
         </Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={gotoUseCallBackScreen}>
-        <Text
-          // eslint-disable-next-line react-native/no-inline-styles
-          style={{
-            marginBottom: 100,
-            fontSize: 24,
-            color: 'orange',
-            fontWeight: 'bold',
-          }}>
+        <Text style={styles.cText}>
           Concept of useCallback
         </Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={gotoMainClassUseMemoScreen}>
-        <Text
-          // eslint-disable-next-line react-native/no-inline-styles
-          style={{
-            marginBottom: 100,
-            fontSize: 24,
-            color: 'orange',
-            fontWeight: 'bold',
-          }}>
+        <Text style={styles.cText}>
           Concept of useMemo
         </Text>
       </TouchableOpacity>
+      </View>
+      <View style = {styles.loginView}>
+        <TextInput maxLength={10} placeholder='Enter Your Phone Number' style = {styles.inp1}>
+        </TextInput>
+        <TextInput placeholder='Enter OTP' style = {styles.inp2}>
+        </TextInput>
+        <TouchableOpacity style = {styles.loginbtn}>
+          <Text style= {styles.logtxt}>Login</Text>
+        </TouchableOpacity>
+        <View style = {styles.signup}>
+           <Text>Don't have Access? <Text onPress={signupClk} style = {styles.signuptxt}>Do Signup</Text> </Text>
+        </View>
+      </View>
+     
     </View>
   );
 }
