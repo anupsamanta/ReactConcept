@@ -1,3 +1,5 @@
+/* eslint-disable no-lone-blocks */
+/* eslint-disable prettier/prettier */
 
 import React, {useState} from 'react';
 import { useDrawerStatus , DrawerActions} from '@react-navigation/drawer';
@@ -6,15 +8,16 @@ import {
 } from 'react-native';
 let isDrawerOpen = false;
 const Home = (props, navigation)  => {
-  gotoNextScreen = () =>{
+  const gotoNextScreen = () =>{
     props.navigation.navigate("ProfileScreen")
-  }
-  gotoNextScreenAPI = () =>{
-     props.navigation.navigate("APIClass")
-    //props.navigation.navigate("AccClass")
-  }
+  };
+    
+  const gotoNextScreenAPI = () =>{ 
+     //props.navigation.navigate("APIClass")
+    props.navigation.navigate("CustomRoot") ;
+  };
 
-  
+
   {
      isDrawerOpen = useDrawerStatus() === 'open';
    // alert(isDrawerOpen)
@@ -22,7 +25,7 @@ const Home = (props, navigation)  => {
   const openCloseDrawer = () =>{
     {isDrawerOpen ? props.navigation.closeDrawer() : props.navigation.openDrawer();}
 
-  }
+  };
     return (
     <View style = {{flex:1, justifyContent : 'center', alignItems : 'center'}}>
       <TouchableOpacity onPress = {openCloseDrawer}>
@@ -37,6 +40,11 @@ const Home = (props, navigation)  => {
         <TouchableOpacity onPress = {gotoNextScreenAPI}>
           <Text style = {{fontSize : 18}}>Go To Api Class</Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress = {gotoNextScreenAPI}>
+          <Text style = {{fontSize : 18}}>Go To Custom Hook</Text>
+        </TouchableOpacity>
+
+        
 
         
         

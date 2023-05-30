@@ -29,12 +29,8 @@ const incrementSalary = useCallback(()=>{
   setSalary(salary + 1000);
 },[salary])
 
-// const incrementSalary = ()=>{
-//   setSalary(salary + 1000);
-// }
  return (
   <View>
-  {/* <Text>Anup Samanyta</Text> */}
     <Title/>
     <Count text="age" count={age}/>
     <B handleClick={incrementAge}>Increment my age</B>

@@ -1,18 +1,34 @@
-
-
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { StyleSheet, FlatList, Text, TouchableOpacity, View, Platform, ScrollView, UIManager } from 'react-native';
-import type { RootState } from '../Redux/app/store'
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  StyleSheet,
+  FlatList,
+  Text,
+  TouchableOpacity,
+  View,
+  Platform,
+  ScrollView,
+  UIManager,
+} from 'react-native';
 import {fetchDoctorProfileDataCreater} from './redux/doctorProfileSlice';
 import {doctorProfileSelector} from './redux';
-import Loader from './Loader'
+import Loader from './Loader';
 import {ExpandableListView} from 'react-native-expandable-listview';
 import {AccordionList, AccordionItem} from 'react-native-accordion-list-view';
-import DownArrow from './image/darrow.png'
+import DownArrow from './image/darrow.png';
 import Accordion from 'react-native-collapsible/Accordion';
 import ListClass from './List';
 import ListContainer from './ListContainer';
+let dropDownData = [
+  {
+    name: 'abc',
+    id: 1,
+  },
+  {
+    name: 'xyz',
+    id: 1,
+  },
+];
 
 const SECTIONS = [
   {
@@ -25,77 +41,64 @@ const SECTIONS = [
   },
 ];
 
-export default function Counter()
- {
+export default function Counter() {
   const myRef = useRef(null);
-
-
   const [loading, setLoading] = useState(false);
   const [showpop, setshowpop] = useState(false);
   const [data, setdata] = useState([
     {
-        id: 0,
-        title: 'Personal Info',
-        body: "Data for Personal info ",
-        isEditShow : false,
-        editClicked : false,
-        isExpand : false,
+      id: 0,
+      title: 'Personal Info',
+      body: 'Data for Personal info ',
+      isEditShow: false,
+      editClicked: false,
+      isExpand: false,
     },
     {
-        id: 1,
-        title: 'Relationship',
-        body: "Data for Relationship",
-        isEditShow : false,
-        editClicked : false,
-        isExpand : false,
+      id: 1,
+      title: 'Relationship',
+      body: 'Data for Relationship',
+      isEditShow: false,
+      editClicked: false,
+      isExpand: false,
     },
   ]);
 
   const [data1, setdata1] = useState([
     {
-        first_name: 'Relationship 1',
-        last_name: "Data  1",
-    },
-    {
-        first_name: 'Relationship 2',
-        last_name: "Data  2",
-        
+      first_name: 'Relationship 1',
+      last_name: 'Data  1',
     },
   ]);
 
- const dispatch = useDispatch()
- let temp= [];
- let listData;
-  listData = useSelector(
-    doctorProfileSelector.getDoctorProfileHeader(),
-  );
- 
- //console.log(" List data == " + JSON.stringify(listData))
-  useEffect(() =>{
+  const dispatch = useDispatch();
+  let temp = [];
+  let listData;
+  listData = useSelector(doctorProfileSelector.getDoctorProfileHeader());
+  //console.log(" List data == " + JSON.stringify(listData))
+  useEffect(() => {
     // dispatch(fetchDoctorProfileDataCreater());
-   let arr = [1,2,4];
-   let b = [...arr];
-   b.length = 0;
-   console.log("Arr = " + JSON.stringify(arr));
-   console.log("b = " + JSON.stringify(b))
-  },[data1])
+    //  let arr = [1,2,4];
+    //  let b = [...arr];
+    //  b.length = 0;
+    //  console.log("Arr = " + JSON.stringify(arr));
+    //  console.log("b = " + JSON.stringify(b))
+  }, [data1]);
 
   useEffect(() => {
     if (Platform.OS === 'android') {
-        if (UIManager.setLayoutAnimationEnabledExperimental) {
-            UIManager.setLayoutAnimationEnabledExperimental(true);
-        }
+      if (UIManager.setLayoutAnimationEnabledExperimental) {
+        UIManager.setLayoutAnimationEnabledExperimental(true);
+      }
     }
-}, []);
+  }, []);
 
-  
-
-  const callRemoteApi = ()=>{
+  const callRemoteApi = () => {
     setLoading(true);
-    dispatch(fetchDoctorProfileDataCreater({value : '2'}));
-  }
+    dispatch(fetchDoctorProfileDataCreater({value: '2'}));
+  };
 
-  const _renderSectionTitle = (section) => {
+  const _renderSectionTitle = section => {
     return (
       <View style={styles.content}>
         <Text>{section.content}</Text>
@@ -103,7 +106,7 @@ export default function Counter()
     );
   };
 
-  const _renderHeader = (section) => {
+  const _renderHeader = section => {
     return (
       <View style={styles.header}>
         <Text style={styles.headerText}>{section.title}</Text>
@@ -111,7 +114,7 @@ export default function Counter()
     );
   };
 
-  const _renderContent = (section) => {
+  const _renderContent = section => {
     return (
       <View style={styles.content}>
         <Text>{section.content}</Text>
@@ -119,41 +122,40 @@ export default function Counter()
     );
   };
 
-  const _updateSections = (activeSections) => {
-    this.setState({ activeSections });
+  const _updateSections = activeSections => {
+    this.setState({activeSections});
   };
- 
 
   const renderItem = ({item}) => {
     return (
-      <View style = {{flexDirection : 'row'}}>
-        <Text style = {{fontWeight : 'bold', marginBottom : 4, marginRight : 20}}>{item.first_name}</Text>
+      <View style={{flexDirection: 'row'}}>
+        <Text style={{fontWeight: 'bold', marginBottom: 4, marginRight: 20}}>
+          {item.first_name}
+        </Text>
         <Text>{item.last_name}</Text>
-        </View>
+      </View>
     );
   };
-  const callEdit = (item) =>{
+  const callEdit = item => {
     let tempData = [...data];
 
     let tempObj = tempData[item.id];
-    tempObj.editClicked = !tempObj.editClicked ;
+    tempObj.editClicked = !tempObj.editClicked;
     setTimeout(() => {
-      setdata(tempData)
+      setdata(tempData);
     }, 10);
-    
-    console.log("+++++++" + JSON.stringify(data))
-   // pressOn(item)
-  }
 
+    console.log('+++++++' + JSON.stringify(data));
+    // pressOn(item)
+  };
 
-const pressOnRow = (item) =>{
-  let tempArr = [];
-  for(let i = 0 ; i < data.length ; i++){
-    let temp = data[i];
-    if(temp.id == item.id){
+  const pressOnRow = item => {
+    let tempArr = [];
+    for (let i = 0; i < data.length; i++) {
+      let temp = data[i];
+      if (temp.id === item.id){
       temp.isExpand = true;
-    }
-    else{
+      } else {
       temp.isExpand = false;
     }
     tempArr.push(temp)
@@ -188,26 +190,39 @@ const minus = useCallback(() =>{
 },[data1])
 
 showModal = () =>{
-  myRef.current.childMethod();
+  myRef.current.childMethod('Modal 1');
+}
+showModal1 = () =>{
+  myRef.current.childMethod('Modal 2');
 }
 
-callFromChild = (v) =>{
+callAddRemove = (v, index) =>{
   if(v == '+'){
-    let tempArr = [];
-    tempArr = [...data1];
+    // let tempArr = [];
+    // tempArr = [...data1];
+    // let obj = {
+    //   first_name: 'Newly Added',
+    //   last_name: "added value",
+    // }
+    // tempArr.push(obj);
+    // setdata1(tempArr)
     let obj = {
-      first_name: 'New',
-      last_name: "added ",
+      first_name: 'Newly Added',
+      last_name: "added value",
     }
-    tempArr.push(obj);
-    setdata1(tempArr)
+    setdata1([...data1, obj])
+    
   }
   else{
+    console.log("Delete Index " + index)
     let tempArr = [...data1];
     tempArr.splice(0, 1);
    setdata1(tempArr);
   }
   
+}
+onSubmit = (val) =>{
+ // alert(val)
 }
   return (
     <View style = {{flex: 1, alignItems : 'center', justifyContent : 'center'}}>
@@ -215,7 +230,7 @@ callFromChild = (v) =>{
         {/* {
           loading?<Loader />: null
         } */}
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style = {{marginTop : 20, backgroundColor : 'orange', padding : 10,
            alignItems : 'center', justifyContent : 'center'}}
           onPress={callRemoteApi}
@@ -235,42 +250,29 @@ callFromChild = (v) =>{
           onPress={minus}
         >
         <Text>-</Text>  
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <TouchableOpacity
           style = {{marginTop : 20, backgroundColor : 'orange', padding : 10,
            alignItems : 'center', justifyContent : 'center'}}
           onPress={showModal}
         >
-        <Text>Show Modal</Text>  
+        <Text>Show Modal 1</Text>  
         </TouchableOpacity>
-      <Text style = {{marginTop : 20,
-         fontWeight : 'bold',
-         fontSize : 14}}>Data Getting from API11</Text>
 
-        <Text onPress={btnClk} style = {{marginTop : 20,
-         fontWeight : 'bold',
-         fontSize : 14}}>Button</Text>
-         {/* <FlatList
-         extraData={listData}
-        style = {{marginTop : 20}}
-        data={listData} 
-        renderItem={renderItem}
-       // keyExtractor={item => item.id}
-      /> */}
-      {/* <ListContainer /> */}
-      <ListClass callFromChild = {callFromChild} data={data1} ref={myRef}/>
-
-
-      {/* <Accordion
-        sections={SECTIONS}
-       activeSections={[]}
-        renderSectionTitle={_renderSectionTitle}
-        renderHeader={_renderHeader}
-        renderContent={_renderContent}
-        onChange={()=>_updateSections}
-      /> */}
-     
+        <TouchableOpacity
+          style = {{marginTop : 20, backgroundColor : 'orange', padding : 10,
+           alignItems : 'center', justifyContent : 'center'}}
+          onPress={showModal1}
+        >
+        <Text>Show Modal 2</Text>  
+        </TouchableOpacity>
+      <ListClass
+      submit = {onSubmit} 
+      callFromChild = {callAddRemove} 
+      data={data1}
+      dropDownData = {dropDownData} 
+      ref={myRef}/>
       </View> 
     </View>
   )

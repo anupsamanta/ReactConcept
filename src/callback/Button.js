@@ -11,4 +11,5 @@ function Button11(props) {
     </View>
   );
 }
-export default React.memo(Button11);
+//export default React.memo(Button11);
+export default Button11;
