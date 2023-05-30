@@ -28,9 +28,9 @@ import {
   Colors
 } from 'react-native/Libraries/NewAppScreen';
 
-import HomeScreen from './src/Home.js';
+import HomeScreen from './src/appCode/Home.js';
 import ProfileScreen from './src/Profile.js';
-import Login from './src/Login.js';
+import Login from './src/appCode/Login.js';
 import Concept from './src/Concept';
 import CounterScreen from './src/features/counter/counter';
 import CounterScreenNew from './src/features/counter/counterNEW';
@@ -42,6 +42,7 @@ import useStateClass from './src/useStateConcept.js';
 
 import MainClass from './src/callback/Concept.js'
 import MainClassUseMemo from './src/useMemo/CounterUseMemo.js';
+import SignupClass from "./src/appCode/signup.js";
 
 
 const App = () => {
@@ -125,6 +126,12 @@ const App = () => {
           component={MainClassUseMemo}
           options={{headerShown: true}}
         />
+        <Stack.Screen
+          name="SignupClass"
+          component={SignupClass}
+          options={{headerShown: true}}
+        />
+        
       </Stack.Navigator>
       
       

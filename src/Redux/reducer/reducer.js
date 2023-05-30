@@ -42,7 +42,7 @@ const counterReducers = (state = initialState, action) => {
 
       
       case "GET_API_DATA":
-        console.log("API Data Anup updated " + JSON.stringify(action) )
+        console.log("API Data  updated " + JSON.stringify(action) )
       return { 
         ...state,
         value: state.value - 1,
