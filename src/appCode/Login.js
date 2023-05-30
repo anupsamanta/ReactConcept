@@ -1,5 +1,5 @@
-import React, {useEffect, useReducer} from 'react';
-import {View, TouchableOpacity, Text, BackHandler, Alert} from 'react-native';
+import React, { useEffect, useReducer } from 'react';
+import { View, TouchableOpacity, Text, BackHandler, Alert } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import styles from './style';
 import Validation from './common/validation.js';
@@ -8,13 +8,13 @@ const initialState = {
   mob: '',
   otp: ''
 }
-const dispatchLogin = (state, action) =>{
-  switch(action.type){
+const dispatchLogin = (state, action) => {
+  switch (action.type) {
     case 'reset':
-    return initialState;
+      return initialState;
     case 'typemob':
       {
-        return {...state, mob: action.value}
+        return { ...state, mob: action.value }
       }
   }
 
@@ -27,16 +27,16 @@ function Login(props) {
   const goto = () => {
     props.navigation.navigate('useReducerClass');
   };
-  const gotoUseStateScreen = ()=>{
-    props.navigation.navigate('useStateClass'); 
+  const gotoUseStateScreen = () => {
+    props.navigation.navigate('useStateClass');
   }
-  const gotoUseCallBackScreen = () =>{
-    props.navigation.navigate('MainClass'); 
-    
+  const gotoUseCallBackScreen = () => {
+    props.navigation.navigate('MainClass');
+
   }
-  const gotoMainClassUseMemoScreen = () =>{
-    props.navigation.navigate('MainClassUseMemo'); 
-    
+  const gotoMainClassUseMemoScreen = () => {
+    props.navigation.navigate('MainClassUseMemo');
+
   }
   useEffect(() => {
     const backAction = () => {
@@ -46,7 +46,7 @@ function Login(props) {
           onPress: () => null,
           style: 'cancel',
         },
-        {text: 'YES', onPress: () => BackHandler.exitApp()},
+        { text: 'YES', onPress: () => BackHandler.exitApp() },
       ]);
       return true;
     };
@@ -58,71 +58,69 @@ function Login(props) {
 
     return () => backHandler.remove();
   }, []);
-  const signupClk = () =>{
+  const signupClk = () => {
     props.navigation.navigate("SignupClass");
   }
-  const resetMobile = () =>{
-    dispatch1({type: 'reset'})
+  const resetMobile = () => {
+    dispatch1({ type: 'reset' })
   }
-  const typeMobileNumber = (text) =>{
-    dispatch1({type: 'typemob',value: text});
+  const typeMobileNumber = (text) => {
+    dispatch1({ type: 'typemob', value: text });
   }
-  const loginClk =()=>{
-    if(Validation.isMobileValid(state.mob)){
+  const loginClk = () => {
+    if (Validation.isMobileValid(state.mob)) {
       alert(NetworkUrl.baseUrl)
-    }else{
+    } else {
       alert("Please enter 10 digit phone number")
-      
+
     }
   }
   return (
-    // eslint-disable-next-line react-native/no-inline-styles
     <View style={styles.mainView}>
-      <View style = {styles.conceptView}>
-      <TouchableOpacity onPress={gotoNextScreen}>
-        <Text
-          // eslint-disable-next-line react-native/no-inline-styles
-          style={styles.cText}>
-          Welcome to Login Screen
-        </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={goto}>
-        <Text
-          style={styles.cText}>
-          Concept of UseReducer
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={gotoUseStateScreen}>
-        <Text style={styles.cText}>
-          Concept of UseState
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={gotoUseCallBackScreen}>
-        <Text style={styles.cText}>
-          Concept of useCallback
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={gotoMainClassUseMemoScreen}>
-        <Text style={styles.cText}>
-          Concept of useMemo
-        </Text>
-      </TouchableOpacity>
-      </View>
-      <View style = {styles.loginView}>
-        <TextInput defaultValue= {state.mob} value= {state.mob} onChangeText={typeMobileNumber} maxLength={10} placeholder='Enter Your Phone Number' style = {styles.inp1}>
-        </TextInput>
-        <Text onPress={resetMobile} style={{position:'absolute', bottom : '90%', right: '5%'}}>Reset</Text>
-        <TextInput placeholder='Enter OTP' style = {styles.inp2}>
-        </TextInput>
-        <TouchableOpacity onPress={loginClk} style = {styles.loginbtn}>
-          <Text style= {styles.logtxt}>Login</Text>
+      <View style={styles.conceptView}>
+        <TouchableOpacity onPress={gotoNextScreen}>
+          <Text
+            style={styles.cText}>
+            Welcome to Login Screen
+          </Text>
         </TouchableOpacity>
-        <View style = {styles.signup}>
-           <Text>Don't have Access? <Text onPress={signupClk} style = {styles.signuptxt}>Do Signup</Text> </Text>
+
+        <TouchableOpacity onPress={goto}>
+          <Text
+            style={styles.cText}>
+            Concept of UseReducer
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={gotoUseStateScreen}>
+          <Text style={styles.cText}>
+            Concept of UseState
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={gotoUseCallBackScreen}>
+          <Text style={styles.cText}>
+            Concept of useCallback
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={gotoMainClassUseMemoScreen}>
+          <Text style={styles.cText}>
+            Concept of useMemo
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.loginView}>
+        <TextInput defaultValue={state.mob} value={state.mob} onChangeText={typeMobileNumber} maxLength={10} placeholder='Enter Your Phone Number' style={styles.inp1}>
+        </TextInput>
+        <Text onPress={resetMobile} style={{ position: 'absolute', bottom: '90%', right: '5%' }}>Reset</Text>
+        <TextInput placeholder='Enter OTP' style={styles.inp2}>
+        </TextInput>
+        <TouchableOpacity onPress={loginClk} style={styles.loginbtn}>
+          <Text style={styles.logtxt}>Login</Text>
+        </TouchableOpacity>
+        <View style={styles.signup}>
+          <Text>Don't have Access? <Text onPress={signupClk} style={styles.signuptxt}>Do Signup</Text> </Text>
         </View>
       </View>
-     
+
     </View>
   );
 }
