@@ -20,7 +20,7 @@ const Home = (props, navigation)  => {
 
   {
      isDrawerOpen = useDrawerStatus() === 'open';
-   // alert(isDrawerOpen)
+    alert(isDrawerOpen)
   }
   const openCloseDrawer = () =>{
     {isDrawerOpen ? props.navigation.closeDrawer() : props.navigation.openDrawer();}
