@@ -16,6 +16,9 @@ const Home = (props, navigation)  => {
      //props.navigation.navigate("APIClass")
     props.navigation.navigate("CustomRoot") ;
   };
+  const gotoNextScreenAPI2 = () =>{ 
+    props.navigation.navigate("APIClass")
+ };
 
 
   {
@@ -34,6 +37,23 @@ const Home = (props, navigation)  => {
       <TouchableOpacity onPress = {openCloseDrawer}>
           <Text>OPEN/CLOSE DRAWER</Text>
         </TouchableOpacity>
+      <Text style = {{ fontSize : 24, color : 'orange', fontWeight : 'bold'}}>Home Screen</Text>
+        <TouchableOpacity onPress = {gotoNextScreen}>
+          <Text style = {{fontSize : 18}}>Go To Profile Screen</Text>
+        </TouchableOpacity>
+
+        <Text style = {{ fontSize : 24, color : 'orange', fontWeight : 'bold'}}>Home Screen</Text>
+        <TouchableOpacity onPress = {gotoNextScreenAPI}>
+          <Text style = {{fontSize : 18}}>Go To Api Class</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress = {gotoNextScreenAPI2}>
+          <Text style = {{fontSize : 18}}>Go To Custom Hook ----</Text>
+        </TouchableOpacity>
+
+        
+
+        
+        
     </View>);
     }
     export default React.memo(Home);

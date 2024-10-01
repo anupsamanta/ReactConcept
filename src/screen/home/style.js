@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
     },
     mainView:{
         flex: 1,
-        marginTop: 50,   
+        marginTop: 50, 
+        backgroundColor: 'white'  
     },
     conceptView:{
         flex: 1, 
