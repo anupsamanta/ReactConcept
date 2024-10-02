@@ -15,7 +15,7 @@ const [salary, setSalary] = useState(25000)
 
 
 useEffect(() => {
- 
+ alert("kk")
   },[]);
 
 const incrementAge = useCallback(()=>{
@@ -33,7 +33,7 @@ const incrementSalary = useCallback(()=>{
   <View>
     <Title/>
     <Count text="age" count={age}/>
-    <B handleClick={incrementAge}>Increment my age</B>
+    <B handleClick={incrementAge}>Increment my age vdsv</B>
     <Count text="salary" count={salary} />
     <B handleClick={incrementSalary}>Increment my salary</B>
  </View>

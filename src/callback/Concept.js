@@ -1,62 +1,74 @@
-import React, { useState, useCallback, useMemo, useEffect } from 'react';
-import Title from './Title';
-import Count from './count';
-import B from './Button'
-import {
-  Text,
-  View,
-  TouchableOpacity
-} from 'react-native';
-import CryptoJS from "react-native-crypto-js";
-function Concept() {
-  const [age, setAge] = useState(25);
-  const [salary, setSalary] = useState(25000)
-  // const incrementAge = () => {setAge(age + 1);
-  //  }
+import React, {useState, useCallback} from 'react';
+import {View, Text, Button} from 'react-native';
 
-
-  useEffect(() => {
-
-  }, []);
-
-  const incrementAge = useCallback(() => {
-    setAge(age + 1)
-    //callApp()
-  }, [age])
-  // const incrementAge = () => {
-  //   setAge(age + 1)
-  //   callApp()
-  // }
-  const callApp = () => {
-    console.log(" ========= ")
-  }
-  const incrementSalary = () => {
-    setSalary(salary + 1000);
-    callAppSal()
-  }
-
-  // const incrementSalary = useCallback(() => {
-  //   setSalary(salary + 1)
-  //   callApp()
-  // }, [salary])
-
-  const callAppSal = () => {
-    console.log(" ========= ")
-  }
+// Child component (memoized with React.memo)
+const ChildComponent = React.memo(({onClick}) => {
+  console.log('Child Component rendered 00');
 
   return (
     <View>
-      <Title count = {age}/>
-      {/* <Count text="age" count={age} /> */}
-      {/* <B handleClick={incrementAge}>Increment my age</B> */}
-      <TouchableOpacity onPress={incrementAge}>
-        <Text>Increment my Age</Text></TouchableOpacity>
-      {/* <Count text="salary" count={salary} /> */}
-      {/* <B handleClick={incrementSalary}>Increment my salary</B> */}
-      <TouchableOpacity onPress={incrementSalary}>
-        <Text>Increment my Salary</Text>
-      </TouchableOpacity>
+      <Button title="Click Me" onPress={onClick} />
     </View>
   );
-}
-export default Concept;
+});
+
+// Parent component
+const ParentComponent = () => {
+  const [count, setCount] = useState(0);
+
+  // Memoized callback function using useCallback
+  const handleClick = () => {
+    console.log('Button clicked');
+  };
+
+  // 1.Keep it as it is
+  //2. Remove callback from handle click, then React.memo will not work
+  // 3. Remove onClick={handleClick} then see React.memo will  work.
+  // Conclusion : Usecallback prevents un-necessary rerenders of the child componenets, when We passed a function to a child component, otherwise React.memo is suffiecient
+
+  return (
+    <View>
+      <Text>Count: {count}</Text>
+      <Button title="Increment Count" onPress={() => setCount(count + 1)} />
+      <ChildComponent onClick={handleClick} />
+    </View>
+  );
+};
+
+export default ParentComponent;
+
+
+
+//Other example without Child component
+
+// import React, { useState, useEffect, useCallback } from 'react';
+// import { View, Text, Button } from 'react-native';
+
+// const ParentComponent = () => {
+//   const [count, setCount] = useState(0);
+//   const [anotherState, setAnotherState] = useState(0);
+
+//   // Function to log the count (wrapped in useCallback)
+//   const logCount = useCallback(() => {
+//     console.log('Count value:', count);
+//   },[count]);
+
+//   // useEffect that depends on logCount
+//   useEffect(() => {
+//     alert('fgfg')
+//     logCount(); // This will only run when logCount changes (i.e., when 'count' changes)
+//   }, [logCount]);
+
+//   return (
+//     <View style={{ padding: 20 }}>
+//       <Text>Count: {count}</Text>
+//       <Button title="Increment Count" onPress={() => setCount(count + 1)} />
+      
+//       <Text>Another State: {anotherState}</Text>
+//       <Button title="Update Another State" onPress={() => setAnotherState(anotherState + 1)} />
+//     </View>
+//   );
+// };
+
+// export default ParentComponent;
+
